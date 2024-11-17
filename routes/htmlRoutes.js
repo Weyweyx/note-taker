@@ -1,17 +1,19 @@
-const express = require('express');
 const path = require('path');
-const app = express();
+const router = require('express').Router();
 
 // Serve the landing page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+router.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
-// Static assets
-app.use(express.static('public'));
-
-// Start the server
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// Serve the notes page
+router.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../notes.html'));
 });
+
+// Wildcard route to direct all other requests to the index.html
+router.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../index.html'));
+});
+
+module.exports = router;
