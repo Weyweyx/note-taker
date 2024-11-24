@@ -1,19 +1,22 @@
+const express = require('express');
 const path = require('path');
-const router = require('express').Router();
+const app = express();
 
 // Serve the landing page
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'index.html'));
+});
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../', 'notes.html'));
 });
 
-// Serve the notes page
-router.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, '../notes.html'));
-});
+// Static assets
+app.use(express.static('public'));
 
-// Wildcard route to direct all other requests to the index.html
-router.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
+// Start the server
+//const PORT = process.env.PORT || 3001;
+//app.listen(PORT, () => {
+  //console.log(`Server running on http://localhost:${PORT}`);
+//});
 
-module.exports = router;
+module.exports = app;

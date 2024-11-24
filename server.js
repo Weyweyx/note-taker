@@ -3,7 +3,7 @@ const path = require('path');
 const apiRoutes = require('./routes/apiRoutes'); // Your API routes
 const htmlRoutes = require('./routes/htmlRoutes'); // Import your HTML routes
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 
 // Middleware to parse JSON and URL-encoded form data
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(express.static('public'));
 app.use('/api', apiRoutes);
 
 // Use HTML routes (separate file)
-app.use(htmlRoutes);
+app.use("/", htmlRoutes);
 
 // Start the server
 app.listen(PORT, () => {
